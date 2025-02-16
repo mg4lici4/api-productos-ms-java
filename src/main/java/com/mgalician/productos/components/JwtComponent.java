@@ -1,21 +1,31 @@
-package com.mgalician.productos.utils;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+package com.mgalician.productos.components;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
-public class JwtUtil {
-    private String SECRET_KEY = "imnsda7y432g336suy213rt5r3dvqywsty5s3r3y2vd"; // Puedes cambiar esta clave a una más segura
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-    // Extraer el nombre de usuario del token JWT
+import com.mgalician.productos.utils.ConstantesUtil;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+@Component
+public class JwtComponent {
+
+    @Value(ConstantesUtil.JWT_SECRET_KEY)
+    private String SECRET_KEY;
+
+    /**
+     * Extraer el username del token
+     * @param token token que contiene la información del usuario firmada.
+     * @return
+     */
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
