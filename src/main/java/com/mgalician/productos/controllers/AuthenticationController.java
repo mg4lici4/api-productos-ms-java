@@ -1,16 +1,21 @@
 package com.mgalician.productos.controllers;
 
-import com.mgalician.productos.components.JwtComponent;
-import com.mgalician.productos.models.dtos.CredencialesDto;
-import com.mgalician.productos.models.dtos.JWTDto;
-import com.mgalician.productos.models.dtos.RespuestaGenericaDto;
-import com.mgalician.productos.services.UserDetailsServiceImpl;
+import static com.mgalician.productos.utils.ConstantesUtil.LOGIN;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mgalician.productos.components.JwtComponent;
+import com.mgalician.productos.models.dtos.CredencialesDto;
+import com.mgalician.productos.models.dtos.JWTDto;
+import com.mgalician.productos.models.dtos.RespuestaGenericaDto;
+import com.mgalician.productos.services.UserDetailsServiceImpl;
 
 @RestController
 public class AuthenticationController {
@@ -24,7 +29,7 @@ public class AuthenticationController {
     @Autowired
     private JwtComponent jwtComponent;
 
-    @PostMapping("/api/login")
+    @PostMapping(LOGIN)
     public ResponseEntity<RespuestaGenericaDto> authenticate(@RequestBody CredencialesDto credencialesDto)
             throws Exception {
         RespuestaGenericaDto respuestaGenericaDto = new RespuestaGenericaDto();

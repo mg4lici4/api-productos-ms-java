@@ -1,5 +1,7 @@
 package com.mgalician.productos.components;
 
+import static com.mgalician.productos.utils.ConstantesUtil.JWT_SECRET_KEY;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.mgalician.productos.utils.ConstantesUtil;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,11 +18,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtComponent {
 
-    @Value(ConstantesUtil.JWT_SECRET_KEY)
+    @Value(JWT_SECRET_KEY)
     private String SECRET_KEY;
 
     /**
      * Extraer el username del token
+     * 
      * @param token token que contiene la información del usuario firmada.
      * @return
      */
